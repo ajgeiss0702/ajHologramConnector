@@ -44,4 +44,8 @@ public abstract class HologramManager {
         holograms.forEach(this::destroyHologram);
         holograms.clear();
     }
+
+    public JavaPlugin getPlugin() {
+        return plugin;
+    }
 }

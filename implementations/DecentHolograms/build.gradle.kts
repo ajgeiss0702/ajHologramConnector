@@ -1,0 +1,30 @@
+plugins {
+    id("java")
+}
+
+group = "us.ajg0702.hologram.implementations"
+version = parent!!.version
+
+repositories {
+    mavenCentral()
+    maven { url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") }
+    maven { url = uri("https://jitpack.io") }
+}
+
+dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+
+    compileOnly("org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT")
+
+    compileOnly("net.kyori:adventure-api:4.11.0")
+    compileOnly("net.kyori:adventure-platform-bukkit:4.1.1")
+
+    compileOnly(project(":api"))
+
+    compileOnly("com.github.decentsoftware-eu:decentholograms:2.4.2")
+}
+
+tasks.getByName<Test>("test") {
+    useJUnitPlatform()
+}

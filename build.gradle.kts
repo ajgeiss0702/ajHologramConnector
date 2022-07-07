@@ -19,6 +19,7 @@ dependencies {
     implementation(project(":api"))
 
     implementation(project(":implementations:bukkit"))
+    implementation(project(":implementations:DecentHolograms"))
 
     compileOnly("org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT")
 }

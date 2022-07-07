@@ -44,7 +44,7 @@ public class BukkitHologram extends Hologram {
 
         double height = 0.3;
 
-        Location addingLoc = location.clone().add(0, height * page.getLines().size(), 0);
+        Location addingLoc = location.clone().add(0, -1.78, 0).add(0, height * page.getLines().size(), 0);
 
         for (HologramLine line : page.getLines()) {
             if(!line.isText()) continue;
