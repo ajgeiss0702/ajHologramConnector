@@ -4,6 +4,7 @@ import org.bukkit.Location;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public abstract class Hologram {
 
     protected final HologramManager hologramManager;
