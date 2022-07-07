@@ -2,7 +2,7 @@ plugins {
     id("java")
 }
 
-group = "us.ajg0702.hologram"
+group = "us.ajg0702.hologram.implementations"
 version = parent!!.version
 
 repositories {
@@ -19,6 +19,7 @@ dependencies {
     compileOnly("net.kyori:adventure-api:4.11.0")
     compileOnly("net.kyori:adventure-platform-bukkit:4.1.1")
 
+    compileOnly(project(":api"))
 
 }
 
