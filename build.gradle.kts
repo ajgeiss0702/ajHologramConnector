@@ -49,6 +49,12 @@ publishing {
     }
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+
 tasks.shadowJar {
     archiveClassifier.set("")
 }
