@@ -12,4 +12,11 @@ public class HeadLine extends HologramLine {
     public ItemStack getHeadItem() {
         return headItem;
     }
+
+    @Override
+    public String toString() {
+        return "HeadLine{" +
+                "headItem=" + headItem +
+                '}';
+    }
 }

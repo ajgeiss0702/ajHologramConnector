@@ -63,21 +63,21 @@ public class DecentHologram extends Hologram {
 
             if(pages.size() > 1) {
                 if(i == 0) {
-                    decentPage.addAction(ClickType.LEFT, new Action(ActionType.NEXT_PAGE, null));
+                    decentPage.addAction(ClickType.LEFT, new Action("NEXT_PAGE"));
                     decentPage.addAction(ClickType.RIGHT, new Action(ActionType.PAGE, pages.size()+""));
                 } else if(i == pages.size()-1) {
                     decentPage.addAction(ClickType.LEFT, new Action(ActionType.PAGE, "1"));
-                    decentPage.addAction(ClickType.RIGHT, new Action(ActionType.PREV_PAGE, null));
+                    decentPage.addAction(ClickType.RIGHT, new Action("PREV_PAGE"));
                 } else {
-                    decentPage.addAction(ClickType.LEFT, new Action(ActionType.NEXT_PAGE, null));
-                    decentPage.addAction(ClickType.RIGHT, new Action(ActionType.PREV_PAGE, null));
+                    decentPage.addAction(ClickType.LEFT, new Action("NEXT_PAGE"));
+                    decentPage.addAction(ClickType.RIGHT, new Action("PREV_PAGE"));
                 }
             }
 
             i++;
         }
 
-        DecentHologramsAPI.get().getHologramManager().registerHologram(hologram);
+        //DecentHologramsAPI.get().getHologramManager().registerHologram(hologram);
 
         for (Map.Entry<UUID, Integer> viewers : viewerPages.entrySet()) {
             UUID viewerId = viewers.getKey();

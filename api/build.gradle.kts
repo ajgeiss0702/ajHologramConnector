@@ -16,9 +16,10 @@ dependencies {
 
     compileOnly("org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT")
 
+
     compileOnly("net.kyori:adventure-api:4.11.0")
     compileOnly("net.kyori:adventure-platform-bukkit:4.1.1")
-
+    compileOnly("net.kyori:adventure-text-serializer-plain:4.11.0")
 
 }
 

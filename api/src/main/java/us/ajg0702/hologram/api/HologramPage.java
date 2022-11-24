@@ -14,4 +14,9 @@ public class HologramPage {
     public List<HologramLine> getLines() {
         return lines;
     }
+
+    @Override
+    public String toString() {
+        return lines.toString();
+    }
 }

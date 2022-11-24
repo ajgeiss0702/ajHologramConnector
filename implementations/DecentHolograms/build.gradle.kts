@@ -22,7 +22,7 @@ dependencies {
 
     compileOnly(project(":api"))
 
-    compileOnly("com.github.decentsoftware-eu:decentholograms:2.4.2")
+    compileOnly("com.github.decentsoftware-eu:decentholograms:2.7.7")
 }
 
 tasks.getByName<Test>("test") {
