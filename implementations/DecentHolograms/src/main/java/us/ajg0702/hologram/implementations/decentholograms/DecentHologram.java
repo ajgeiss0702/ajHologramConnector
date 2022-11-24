@@ -1,11 +1,14 @@
 package us.ajg0702.hologram.implementations.decentholograms;
 
 import eu.decentsoftware.holograms.api.DHAPI;
+import eu.decentsoftware.holograms.api.DecentHologramsAPI;
 import eu.decentsoftware.holograms.api.actions.Action;
 import eu.decentsoftware.holograms.api.actions.ActionType;
 import eu.decentsoftware.holograms.api.actions.ClickType;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import us.ajg0702.hologram.api.Hologram;
 import us.ajg0702.hologram.api.HologramManager;
 import us.ajg0702.hologram.api.HologramPage;
@@ -14,7 +17,10 @@ import us.ajg0702.hologram.api.lines.HeadLine;
 import us.ajg0702.hologram.api.lines.HologramLine;
 import us.ajg0702.hologram.api.lines.TextLine;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class DecentHologram extends Hologram {
 
@@ -34,12 +40,13 @@ public class DecentHologram extends Hologram {
 
     @Override
     public void updatePages() {
-        int i = 0;
+        Map<UUID, Integer> viewerPages = new HashMap<>(hologram.getViewerPages());
         for (eu.decentsoftware.holograms.api.holograms.HologramPage page : hologram.getPages()) {
-            hologram.removePage(i++);
+            hologram.removePage(0);
+
         }
 
-        i = 0;
+        int i = 0;
         for (HologramPage page : pages) {
             eu.decentsoftware.holograms.api.holograms.HologramPage decentPage = hologram.addPage();
 
@@ -54,18 +61,37 @@ public class DecentHologram extends Hologram {
                 }
             }
 
-            if(i == 0) {
-                decentPage.addAction(ClickType.LEFT, new Action(ActionType.NEXT_PAGE, null));
-                decentPage.addAction(ClickType.RIGHT, new Action(ActionType.PAGE, pages.size()+""));
-            } else if(i == pages.size()) {
-                decentPage.addAction(ClickType.LEFT, new Action(ActionType.PAGE, "1"));
-                decentPage.addAction(ClickType.RIGHT, new Action(ActionType.PREV_PAGE, null));
-            } else {
-                decentPage.addAction(ClickType.LEFT, new Action(ActionType.NEXT_PAGE, null));
-                decentPage.addAction(ClickType.RIGHT, new Action(ActionType.PREV_PAGE, null));
+            if(pages.size() > 1) {
+                if(i == 0) {
+                    decentPage.addAction(ClickType.LEFT, new Action(ActionType.NEXT_PAGE, null));
+                    decentPage.addAction(ClickType.RIGHT, new Action(ActionType.PAGE, pages.size()+""));
+                } else if(i == pages.size()-1) {
+                    decentPage.addAction(ClickType.LEFT, new Action(ActionType.PAGE, "1"));
+                    decentPage.addAction(ClickType.RIGHT, new Action(ActionType.PREV_PAGE, null));
+                } else {
+                    decentPage.addAction(ClickType.LEFT, new Action(ActionType.NEXT_PAGE, null));
+                    decentPage.addAction(ClickType.RIGHT, new Action(ActionType.PREV_PAGE, null));
+                }
             }
 
             i++;
+        }
+
+        DecentHologramsAPI.get().getHologramManager().registerHologram(hologram);
+
+        for (Map.Entry<UUID, Integer> viewers : viewerPages.entrySet()) {
+            UUID viewerId = viewers.getKey();
+            Integer page = viewers.getValue();
+
+
+            Player player = Bukkit.getPlayer(viewerId);
+            if(player == null) continue;
+
+            System.out.println(player.getName()+" "+page);
+
+            if(pages.size()-1 < page) page = 0;
+
+            hologram.show(player, page);
         }
     }
 }

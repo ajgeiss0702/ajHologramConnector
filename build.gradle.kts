@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "us.ajg0702"
-version = "1.0.0"
+version = "1.0.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -33,7 +33,7 @@ publishing {
 
     repositories {
 
-        val mavenUrl = "https://repo.ajg0702.us/releases"
+        val mavenUrl = "https://repo.ajg0702.us/snapshots"
 
         if(!System.getenv("REPO_TOKEN").isNullOrEmpty()) {
             maven {
